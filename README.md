@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <!-- saved from url=(0042)https://speechresearch.github.io/lrspeech/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -622,10 +621,3 @@ Code will be released after the paper is accepted by the conference. -->
  <script type="text/javascript" async="" src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/MathJax.js.下载">
  </script>
 
-
-
-
-
-
-
-</body></html>
