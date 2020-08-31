@@ -283,18 +283,21 @@ Specifically, 1) To handle larger range of frequencies caused by higher sampling
 Besides, we also incorporate several systematic designs in HiFiSinger, including 1) adding F0 (pitch) and V/UV (voiced/unvoiced) as acoustic features, 2) analyzing the window/hop size trade off, and 3) increasing the receptive field in vocoder, for high-fidelity voices.
 Experiment results show that HiFiSinger synthesizes singing voices with much higher quality than previous system. More ablation studies verify the effectiveness of each design in HiFiSinger.</p>
 
+<h2 id="abstract">Contents</h2>
+<b><a href="#audio-samples">Audio Samples</a></b><br>
+<a href="#audio-quality">1.1 Audio Quality</a><br>
+<b><a href="#ablation-studies">Ablation Studies</a></b><br>
+<a href="#mf-gan">2.1 MF-GAN</a><br>
+<a href="#mw-gan">2.2 MW-GAN</a><br>
+<a href="#pitch-input">2.3 Pitch input</a><br>
+<a href="#win-hop-size">2.4 Window/hop size</a><br>
+<a href="#pitch-control">2.5 Pitch Control</a><br>
+<a href="#duration-control">2.6 Duration control</a><br>
+
+
+
+<span id="audio-samples" name="audio-samples"></span>
 <h2 id="audio-samples">Audio Samples</h2>
-
-<table>
-    <tr><td style="text-align: center"><a href="#audio-quality">Audio Quality</a></td></tr>
-    <tr><td style="text-align: center"><a href="#mf-gan">MF-GAN</a></td></tr>
-    <tr><td style="text-align: center"><a href="#mw-gan">MW-GAN</a></td></tr>
-    <tr><td style="text-align: center"><a href="#pitch-input">Pitch input</a></td></tr>
-    <tr><td style="text-align: center"><a href="#win-hop-size">Window/hop size</a></td></tr>
-    <tr><td style="text-align: center"><a href="#pitch-control">Pitch Control</a></td></tr>
-    <tr><td style="text-align: center"><a href="#duration-control">Duration control</a></td></tr>
-</table>
-
 
 <span id="audio-quality" name="audio-quality"></span>
 <h3 id="audio-quality">Audio Quality</h3>
@@ -302,93 +305,96 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 <img src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/MOS.png" width="40%" height="20px" alt="LRSpeech_pipline">
 <br>
 
-<p><em>这么说来很不单纯，你陪我看海</em></p>
+
+<ruby>这么说来很不单纯，你陪我看海<rt style="font-size: 15px;">zhè me shuō lái hěn bú dān chún, nǐ péi wǒ kàn hǎi</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">Recording</th>
-<th style="text-align: center">HiFiSinger</th>
-<th style="text-align: center">Baseline</th>
+<th style="text-align: center">Baseline (24kHz up)</th>
 <th style="text-align: center">XiaoiceSing</th>
+<th style="text-align: center">HiFiSinger</th>
 </tr></thead><tbody>
 <tr>
 <td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording/7000000184.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k-up/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 <td style="text-align: center"><audio controls="controls"><source src="newaudio/XiaoiceSing/7000000184-0.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 <table><thead>
 <tr>
-<th style="text-align: center">Recording(24k)</th>
-<th style="text-align: center">HiFiSinger(24k)</th>
-<th style="text-align: center">Baseline(24KHz)</th>
-<th style="text-align: center">Baseline(24KHz up)</th>
+<th style="text-align: center">Recording (24kHz)</th>
+<th style="text-align: center">Baseline (24kHz)</th>
+<th style="text-align: center">Baseline</th>
+<th style="text-align: center">HiFiSinger (24kHz)</th>
 </tr></thead><tbody>
 <tr>
 <td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording-24k/7000000184.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-24k/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 <td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k-up/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-24k/7000000184-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 
-<p><em>遇见一个人然后生命全改变，原来不是恋爱才有的情节</em></p>
+<!-- <p><em>宁静的夏天，天空中繁星点点</em></p> -->
+<ruby>宁静的夏天，天空中繁星点点<rt style="font-size: 15px;">níng jìng de xià tiān, tiān kōng zhōng fán xīng diǎn diǎn</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">Recording</th>
-<th style="text-align: center">HiFiSinger</th>
-<th style="text-align: center">Baseline</th>
+<th style="text-align: center">Baseline (24kHz up)</th>
 <th style="text-align: center">XiaoiceSing</th>
+<th style="text-align: center">HiFiSinger</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording/7000000465.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000465-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline/7000000465-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/XiaoiceSing/7000000465-0.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording/7000000050.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k-up/7000000050-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/XiaoiceSing/7000000050-0.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000050-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 <table><thead>
 <tr>
-<th style="text-align: center">Recording(24k)</th>
-<th style="text-align: center">HiFiSinger(24k)</th>
-<th style="text-align: center">Baseline(24KHz)</th>
-<th style="text-align: center">Baseline(24KHz up)</th>
+<th style="text-align: center">Recording (24kHz)</th>
+<th style="text-align: center">Baseline (24kHz)</th>
+<th style="text-align: center">Baseline</th>
+<th style="text-align: center">HiFiSinger (24kHz)</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording-24k/7000000465.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-24k/7000000465-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k/7000000465-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k-up/7000000465-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording-24k/7000000050.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k/7000000050-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline/7000000050-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-24k/7000000050-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 
-<p><em>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界</em></p>
+<!-- <p><em>坏的是我发现不知不觉不见到你不是很习惯</em></p> -->
+<ruby>坏的是我发现不知不觉不见到你不是很习惯<rt style="font-size: 15px;">huài de shì wǒ fā xiàn bú zhī bú jiào bú jiàn dào nǐ bú shì hěn xí guàn</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">Recording</th>
-<th style="text-align: center">HiFiSinger</th>
-<th style="text-align: center">Baseline</th>
+<th style="text-align: center">Baseline (24kHz up)</th>
 <th style="text-align: center">XiaoiceSing</th>
+<th style="text-align: center">HiFiSinger</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording/7000000501.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000501-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline/7000000501-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/XiaoiceSing/7000000501-0.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording/7000000186.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k-up/7000000186-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/XiaoiceSing/7000000186-0.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000186-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 <table><thead>
 <tr>
-<th style="text-align: center">Recording(24k)</th>
-<th style="text-align: center">HiFiSinger(24k)</th>
-<th style="text-align: center">Baseline(24KHz)</th>
-<th style="text-align: center">Baseline(24KHz up)</th>
+<th style="text-align: center">Recording (24kHz)</th>
+<th style="text-align: center">Baseline (24kHz)</th>
+<th style="text-align: center">Baseline</th>
+<th style="text-align: center">HiFiSinger (24kHz)</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording-24k/7000000501.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-24k/7000000501-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k/7000000501-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k-up/7000000501-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Recording-24k/7000000186.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline-24k/7000000186-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/Baseline/7000000186-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-24k/7000000186-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 
@@ -445,7 +451,7 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tbody></table> -->
 
 
-
+<span id="ablation-studies" name="ablation-studies"></span>
 <h2 id="ablation-studies">Ablation Studies</h2>
 <!-- <p>All of the audio samples use WaveGlow as vocoder.</p> -->
 <span id="mf-gan" name="mf-gan"></span>
@@ -454,7 +460,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 <img src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/mf-gan.png" width="60%" height="20px" alt="LRSpeech_pipline">
 <br>
 
-<p><em>这么说来很不单纯，你陪我看海</em></p>
+<!-- <p><em>这么说来很不单纯，你陪我看海</em></p> -->
+<ruby>这么说来很不单纯，你陪我看海<rt style="font-size: 15px;">zhè me shuō lái hěn bú dān chún, nǐ péi wǒ kàn hǎi</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -470,7 +477,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>遇见一个人然后生命全改变，原来不是恋爱才有的情节</em></p>
+<!-- <p><em>遇见一个人然后生命全改变，原来不是恋爱才有的情节</em></p> -->
+<ruby>遇见一个人然后生命全改变，原来不是恋爱才有的情节<rt style="font-size: 15px;">yù jiàn yī gè rén rán hòu shēng mìng quán gǎi biàn，yuán lái bú shì liàn ài cái yǒu de qíng jiē</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -486,7 +494,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界</em></p>
+<!-- <p><em>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界</em></p> -->
+<ruby>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界<rt style="font-size: 15px;">wǒ de xiǎo guǐ xiǎo guǐ, dòu dòu nǐ de méi yǎn, ràng nǐ xǐ huān zhè shì jiè</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -509,7 +518,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 <img src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/mel_comparison_b.png" width="60%" height="20px" alt="LRSpeech_pipline">
 <br>
 
-<p><em>谁在最需要的时候轻轻拍着我肩膀</em></p>
+<!-- <p><em>谁在最需要的时候轻轻拍着我肩膀</em></p> -->
+<ruby>谁在最需要的时候轻轻拍着我肩膀<rt style="font-size: 15px;">shuí zài zuì xū yào de shí hòu qīng qīng pāi zhe wǒ jiān bǎng</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -521,7 +531,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>见证你成长让我感到充满力量</em></p>
+<!-- <p><em>见证你成长让我感到充满力量</em></p> -->
+<ruby>见证你成长让我感到充满力量<rt style="font-size: 15px;">jiàn zhèng nǐ chéng zhǎng ràng wǒ gǎn dào chōng mǎn lì liàng</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -533,15 +544,16 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>谁能忘记过去一路走来陪你受的伤</em></p>
+<!-- <p><em>你知道它的花语签上名，我继续一个人远行</em></p> -->
+<ruby>你知道它的花语签上名，我继续一个人远行<rt style="font-size: 15px;">nǐ zhī dào tā de huā yǔ qiān shàng míng, wǒ jì xù yī gè rén yuǎn háng</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
 <th style="text-align: center">HiFiSinger without MW-GAN</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000003022_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-o-MWGAN/7000003022_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000451-0_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-o-MWGAN/7000000451_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 
@@ -552,7 +564,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 <img src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/pitch.png" width="60%" height="20px" alt="LRSpeech_pipline">
 <br>
 
-<p><em>这么说来很不单纯，你陪我看海</em></p>
+<!-- <p><em>这么说来很不单纯，你陪我看海</em></p> -->
+<ruby>这么说来很不单纯，你陪我看海<rt style="font-size: 15px;">zhè me shuō lái hěn bú dān chún, nǐ péi wǒ kàn hǎi</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -564,7 +577,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>遇见一个人然后生命全改变，原来不是恋爱才有的情节</em></p>
+<!-- <p><em>遇见一个人然后生命全改变，原来不是恋爱才有的情节</em></p> -->
+<ruby>遇见一个人然后生命全改变，原来不是恋爱才有的情节<rt style="font-size: 15px;">yù jiàn yī gè rén rán hòu shēng mìng quán gǎi biàn, yuán lái bú shì liàn ài cái yǒu de qíng jiē </rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -576,7 +590,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界</em></p>
+<!-- <p><em>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界</em></p> -->
+<ruby>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界<rt style="font-size: 15px;">wǒ de xiǎo guǐ xiǎo guǐ, dòu dòu nǐ de méi yǎn, ràng nǐ xǐ huān zhè shì jiè</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -595,7 +610,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 <!-- <img src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/win-hop-size.png" width="60%" height="20px" alt="LRSpeech_pipline">
 <br> -->
 
-<p><em>这么说来很不单纯，你陪我看海</em></p>
+<!-- <p><em>这么说来很不单纯，你陪我看海</em></p> -->
+<ruby>这么说来很不单纯，你陪我看海<rt style="font-size: 15px;">zhè me shuō lái hěn bú dān chún, nǐ péi wǒ kàn hǎi</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -609,7 +625,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>遇见一个人然后生命全改变，原来不是恋爱才有的情节</em></p>
+<!-- <p><em>遇见一个人然后生命全改变，原来不是恋爱才有的情节</em></p> -->
+<ruby>遇见一个人然后生命全改变，原来不是恋爱才有的情节<rt style="font-size: 15px;">yù jiàn yī gè rén rán hòu shēng mìng quán gǎi biàn, yuán lái bú shì liàn ài cái yǒu de qíng jiē</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -623,7 +640,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界</em></p>
+<!-- <p><em>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界</em></p> -->
+<ruby>我的小鬼小鬼，逗逗你的眉眼，让你喜欢这世界<rt style="font-size: 15px;">wǒ de xiǎo guǐ xiǎo guǐ, dòu dòu nǐ de méi yǎn, ràng nǐ xǐ huān zhè shì jiè</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">HiFiSinger</th>
@@ -643,7 +661,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 <img src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/pitch-control.png" width="90%" height="20px" alt="LRSpeech_pipline">
 <br>
 
-<p><em>左心房，暖暖的好饱满</em></p>
+<!-- <p><em>左心房，暖暖的好饱满</em></p> -->
+<ruby>左心房，暖暖的好饱满<rt style="font-size: 15px;">zuǒ xīn fáng, nuǎn nuǎn de hǎo bǎo mǎn</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">Normal scale</th>
@@ -657,7 +676,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>我想说其实你很好，你自己却不知道</em></p>
+<!-- <p><em>我想说其实你很好，你自己却不知道</em></p> -->
+<ruby>我想说其实你很好，你自己却不知道<rt style="font-size: 15px;">wǒ xiǎng shuō qí shí nǐ hěn hǎo, nǐ zì jǐ què bú zhī dào</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">Normal scale</th>
@@ -671,7 +691,8 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 </tr>
 </tbody></table>
 
-<p><em>在朋友里面就数你最特别，总让我觉得很亲很铁</em></p>
+<!-- <p><em>在朋友里面就数你最特别，总让我觉得很亲很铁</em></p> -->
+<ruby>在朋友里面就数你最特别，总让我觉得很亲很铁<rt style="font-size: 15px;">zài péng yǒu lǐ miàn jiù shù nǐ zuì tè bié, zǒng ràng wǒ jiào dé hěn qīn hěn tiě</rt></ruby>
 <table><thead>
 <tr>
 <th style="text-align: center">Normal scale</th>
@@ -691,45 +712,48 @@ Experiment results show that HiFiSinger synthesizes singing voices with much hig
 <img src="./LRSpeech_ Extremely Low-Resource Speech Synthesis and Recognition - SpeechResearch_files/speed-control.png" width="70%" height="20px" alt="LRSpeech_pipline">
 <br>
 
-<p><em>都可以随便的，你说的，我的愿意去</em></p>
+<!-- <p><em>因为我，完全信任你</em></p> -->
+<ruby>因为我，完全信任你<rt style="font-size: 15px;">yīn wéi wǒ, wán quán xìn rèn nǐ</rt></ruby>
 <table><thead>
 <tr>
-<th style="text-align: center">0.5x Speed</th>
-<th style="text-align: center">1.0x Speed</th>
-<th style="text-align: center">1.5x Speed</th>
+<th style="text-align: center">0.75x Speed</th>
+<th style="text-align: center">1.00x Speed</th>
+<th style="text-align: center">1.25x Speed</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/slow/7000000000_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000000_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/fast/7000000000_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/slow/7000000003_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000003_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/fast/7000000003_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 
-<p><em>小火车，摆动的旋律</em></p>
+<!-- <p><em>我想说其实你很好，你自己却不知道</em></p> -->
+<ruby>我想说其实你很好，你自己却不知道<rt style="font-size: 15px;">wǒ xiǎng shuō qí shí nǐ hěn hǎo, nǐ zì jǐ què bú zhī dào</rt></ruby>
 <table><thead>
 <tr>
-<th style="text-align: center">0.5x Speed</th>
-<th style="text-align: center">1.0x Speed</th>
-<th style="text-align: center">1.5x Speed</th>
+<th style="text-align: center">0.75x Speed</th>
+<th style="text-align: center">1.00x Speed</th>
+<th style="text-align: center">1.25x Speed</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/slow/7000000001_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000001_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/fast/7000000001_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/slow/7000000008_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000008_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/fast/7000000008_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 
-<p><em>都可以是真的，你说的，我都会相信</em></p>
+<!-- <p><em>杜鹃啼血声，芙蓉花蜀国尽缤纷</em></p> -->
+<ruby>杜鹃啼血声，芙蓉花蜀国尽缤纷<rt style="font-size: 15px;">dù juān tí xuè shēng, fú róng huā shǔ guó jìn bīn fēn</rt></ruby>
 <table><thead>
 <tr>
-<th style="text-align: center">0.5x Speed</th>
-<th style="text-align: center">1.0x Speed</th>
-<th style="text-align: center">1.5x Speed</th>
+<th style="text-align: center">0.25x Speed</th>
+<th style="text-align: center">1.00x Speed</th>
+<th style="text-align: center">1.75x Speed</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/slow/7000000002_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000000002_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/fast/7000000002_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/slow/7000003005_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger/7000003005_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="newaudio/HiFiSinger-w-speed-control/fast/7000003005_gen.wav" autoplay="">Your browser does not support the audio element.</audio></td>
 </tr>
 </tbody></table>
 
