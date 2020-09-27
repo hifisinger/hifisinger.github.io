@@ -260,31 +260,30 @@
                 <br>
 <img src="https://hifisinger.github.io/LRSpeech_%20Extremely%20Low-Resource%20Speech%20Synthesis%20and%20Recognition%20-%20SpeechResearch_files/HiFiSinger.png"  width="90%" height="40px"  alt="HiFiSinger_pipline" />
 
-ArXiv: [arXiv:2009.01776](https://arxiv.org/pdf/2009.01776.pdf)
+<!-- ArXiv: [arXiv:2009.01776](https://arxiv.org/pdf/2009.01776.pdf) -->
 
 
 
 
-<h2 id="authors">Authors</h2>
+<!-- <h2 id="authors">Authors</h2>
 <ul>
-<!-- <li>Microsoft STC Asia & Microsoft Research Asia  -->
 <li>Jiawei Chen (Microsoft STC Asia) <a href="mailto:t-jiawch@microsoft.com">t-jiawch@microsoft.com</a></li>
 <li>Xu Tan* (Microsoft Research) <a href="mailto:xuta@microsoft.com">xuta@microsoft.com</a></li>
 <li>Jian Luan (Microsoft STC Asia) <a href="mailto:jianluan@microsoft.com">jianluan@microsoft.com</a></li>
 <li>Tao Qin (Microsoft Research) <a href="mailto:taoqin@microsoft.com">taoqin@microsoft.com</a></li>
 <li>Tie-Yan Liu (Microsoft Research) <a href="mailto:tyliu@microsoft.com">tyliu@microsoft.com</a></li>
 </ul>
-<small>*Corresponding author</small>
+<small>*Corresponding author</small> -->
 
 <h2 id="abstract">Abstract</h2>
-<p>High-fidelity singing voices usually require higher sampling rate (e.g., 48kHz, compared with 16kHz or 24kHz in speaking voices) with large range of frequency to convey expression and emotion. However, higher sampling rate causes the wider frequency band and longer waveform sequences and throws challenges for singing modeling in both frequency and time domains in singing voice synthesis (SVS). Conventional SVS systems that adopt moderate sampling rate (e.g., 16kHz or 24kHz) cannot well address the above challenges. In this paper, we develop HiFiSinger, an SVS system towards high-fidelity singing voice using 48kHz sampling rate. HiFiSinger consists of a FastSpeech based neural acoustic model and a Parallel WaveGAN based neural vocoder to ensure fast training and inference and also high voice quality. To tackle the difficulty of singing modeling caused by high sampling rate (wider frequency band and longer waveform), we introduce multi-scale adversarial training in both the acoustic model and vocoder to improve singing modeling. Specifically, 1) To handle the larger range of frequencies caused by higher sampling rate (e.g., 48kHz vs. 24kHz), we propose a novel sub-frequency GAN (SF-GAN) on mel-spectrogram generation, which splits the full 80-dimensional mel-frequency into multiple sub-bands (e.g. low, middle and high frequency bands) and models each sub-band with a separate discriminator. 2) To model longer waveform sequences caused by higher sampling rate, we propose a multi-length GAN (ML-GAN) for waveform generation to model different lengths of waveform sequences with separate discriminators. 3) We also introduce several additional designs and findings in HiFiSinger that are crucial for high-fidelity voices, such as adding F0 (pitch) and V/UV (voiced/unvoiced flag) as acoustic features, choosing an appropriate window/hop size for mel-spectrogram, and increasing the receptive field in vocoder for long vowel modeling in singing voices. Experiment results show that HiFiSinger synthesizes high-fidelity singing voices with much higher quality: 0.32/0.44 MOS gain over 48kHz/24kHz baseline and 0.83 MOS gain over previous SVS systems. Audio samples are available at <a href="https://speechresearch.github.io/hifisinger"><i>https://speechresearch.github.io/hifisinger</i></a>.</p>
+<p>High-fidelity singing voices usually require higher sampling rate (e.g., 48kHz, compared with 16kHz or 24kHz in speaking voices) with large range of frequency to convey expression and emotion. However, higher sampling rate causes the wider frequency band and longer waveform sequences and throws challenges for singing modeling in both frequency and time domains in singing voice synthesis (SVS). Conventional SVS systems that adopt moderate sampling rate (e.g., 16kHz or 24kHz) cannot well address the above challenges. In this paper, we develop HiFiSinger, an SVS system towards high-fidelity singing voice using 48kHz sampling rate. HiFiSinger consists of a FastSpeech based neural acoustic model and a Parallel WaveGAN based neural vocoder to ensure fast training and inference and also high voice quality. To tackle the difficulty of singing modeling caused by high sampling rate (wider frequency band and longer waveform), we introduce multi-scale adversarial training in both the acoustic model and vocoder to improve singing modeling. Specifically, 1) To handle the larger range of frequencies caused by higher sampling rate (e.g., 48kHz vs. 24kHz), we propose a novel sub-frequency GAN (SF-GAN) on mel-spectrogram generation, which splits the full 80-dimensional mel-frequency into multiple sub-bands (e.g. low, middle and high frequency bands) and models each sub-band with a separate discriminator. 2) To model longer waveform sequences caused by higher sampling rate, we propose a multi-length GAN (ML-GAN) for waveform generation to model different lengths of waveform sequences with separate discriminators. 3) We also introduce several additional designs and findings in HiFiSinger that are crucial for high-fidelity voices, such as adding F0 (pitch) and V/UV (voiced/unvoiced flag) as acoustic features, choosing an appropriate window/hop size for mel-spectrogram, and increasing the receptive field in vocoder for long vowel modeling in singing voices. Experiment results show that HiFiSinger synthesizes high-fidelity singing voices with much higher quality: 0.32/0.44 MOS gain over 48kHz/24kHz baseline and 0.83 MOS gain over previous SVS systems. Audio samples are available at <a href="https://hifisinger.github.io"><i>https://hifisinger.github.io</i></a>.</p>
 
 
 <h2 id="abstract">Contents</h2>
 <b><a href="#audio-samples">Audio Samples</a></b><br>
 <a href="#audio-quality">1.1 Audio Quality</a><br>
 <b><a href="#ablation-studies">Ablation Studies</a></b><br>
-<a href="#Sf-gan">2.1 SF-GAN</a><br>
+<a href="#sf-gan">2.1 SF-GAN</a><br>
 <a href="#mw-gan">2.2 ML-GAN</a><br>
 <a href="#pitch-input">2.3 Pitch input</a><br>
 <a href="#win-hop-size">2.4 Window/hop size</a><br>
